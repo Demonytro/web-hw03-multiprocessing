@@ -20,14 +20,19 @@ def factorize(*number):
     return result_number
 
 
-if __name__ == '__main__':
+def run():
     count_cpu = cpu_count()
     number = [128, 255, 99999, 10651060]
 
     timer_start = time()
 
     with Pool(count_cpu) as pool:
-        logger.debug(pool.map(factorize, number))
+        # logger.debug(pool.map(factorize, number))
+        pool.imap(factorize, number)
 
     timer_finish = time()
-    print(f'Timer synchro - {timer_finish - timer_start}s ')
+    print(f'Timer synchro (pool.imap) - {timer_finish - timer_start}s ')
+
+
+if __name__ == '__main__':
+    run()

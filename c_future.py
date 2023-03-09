@@ -21,15 +21,20 @@ def factorize(*number):
     return result_number
 
 
-if __name__ == '__main__':
+def run():
     count_cpu = cpu_count()
     number = [128, 255, 99999, 10651060]
 
     timer_start = time()
 
     with concurrent.futures.ProcessPoolExecutor(count_cpu) as executor:
-        logger.debug(executor.map(factorize, number))
+        # logger.debug(executor.map(factorize, number))
+        executor.map(factorize, number)
 
     timer_finish = time()
 
     print(f'Timer asynchro (concurrent.futures) - {timer_finish - timer_start}s ')
+
+
+if __name__ == '__main__':
+    run()
