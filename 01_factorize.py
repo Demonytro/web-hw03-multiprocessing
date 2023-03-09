@@ -1,30 +1,38 @@
 from time import time
+import logging
+
+
+logger = logging.getLogger()
+stream_handler = logging.StreamHandler()
+logger.addHandler(stream_handler)
+logger.setLevel(logging.DEBUG)
 
 
 def factorize(*number):
-    print(number, type(number))
     result_number = []
-    print(dict(enumerate(number)))
-    for i, num in enumerate(number):
-        print(i, num)
+    for num in number:
+
         count = range(num+1)[1:]
-        print(count)
+
         res1 = []
         for i in count:
-            try:
-                if not num % i:
-                    res1.append(i)
-            except ZeroDivisionError:
-                continue
-        print(res1)
+
+            if not num % i:
+                res1.append(i)
+
         result_number.append(res1)
     return result_number
 
+
 if __name__ == '__main__':
     timer_start = time()
+
     a, b, c, d = factorize(128, 255, 99999, 10651060)
+
     timer_finish = time()
+    logger.debug(f"{a}, {b}, {c}, {d}")
     print(f'Timer synchro - {timer_finish-timer_start}s ')
+
     assert a == [1, 2, 4, 8, 16, 32, 64, 128]
     assert b == [1, 3, 5, 15, 17, 51, 85, 255]
     assert c == [1, 3, 9, 41, 123, 271, 369, 813, 2439, 11111, 33333, 99999]
